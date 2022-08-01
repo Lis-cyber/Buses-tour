@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'buses.apps.BusesConfig',
     'drivers.apps.DriversConfig',
+    'passengers.apps.PassengersConfig',
+    'routes.apps.RoutesConfig',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

@@ -6,5 +6,3 @@ class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Driver
         fields = '__all__'
-        # abstract = True
-        # ordering = [id]

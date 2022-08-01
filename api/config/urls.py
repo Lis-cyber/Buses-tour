@@ -18,6 +18,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(r'api/', include('passengers.urls', namespace='passengers')),
+    path(r'api/', include('routes.urls', namespace='routes')),
     path(r'api/', include('drivers.urls', namespace='drivers')),
     path(r'api/', include('buses.urls', namespace='buses')),
 ]
