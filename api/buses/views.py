@@ -1,11 +1,17 @@
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from rest_framework import viewsets
 
 from buses.models import Bus
 from buses.serializers import BusSerializer
 
 # Create your views here.
+
+
+class BusViewSet(viewsets.ModelViewSet):
+    queryset = Bus.objects.all()
+    serializer_class = BusSerializer
 
 
 @csrf_exempt
