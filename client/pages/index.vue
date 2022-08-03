@@ -24,7 +24,7 @@ export default {
     return {
       title: "Home page",
       icon: "mdi-chart-bubble",
-      title: "Inspire",
+      title: "Home",
       to: "/buses",
     };
   },
