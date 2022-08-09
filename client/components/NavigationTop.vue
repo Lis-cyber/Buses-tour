@@ -3,10 +3,10 @@
     <template v-if="windowWidth > 1000 && windowHeight > 300">
       <v-app-bar outlined elevation="6" light>
         <template>
-          <v-tab><NuxtLink to="/">Trayectos</NuxtLink></v-tab>
+          <v-tab><NuxtLink to="/Routes">Trayectos</NuxtLink></v-tab>
           <v-tab><NuxtLink to="/Buses">Buses</NuxtLink></v-tab>
-          <v-tab><NuxtLink to="/">Conductores</NuxtLink></v-tab>
-          <v-tab><NuxtLink to="/">Pasajeros</NuxtLink></v-tab>
+          <v-tab><NuxtLink to="/Drivers">Conductores</NuxtLink></v-tab>
+          <v-tab><NuxtLink to="/Passengers">Pasajeros</NuxtLink></v-tab>
         </template>
       </v-app-bar>
     </template>

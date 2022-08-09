@@ -1,9 +1,9 @@
-from django.urls import path
-from passengers import views
+from rest_framework import routers
+from .views import PassengerViewSet
 
 app_name = 'passengers'
 
-urlpatterns = [
-    path(r'passengers', views.passengerApi),
-    path(r'passengers/<int:id>', views.passengerApi),
-]
+router = routers.SimpleRouter()
+router.register('passengers', PassengerViewSet)
+
+urlpatterns = router.urls

@@ -1,9 +1,10 @@
-from django.urls import path
-from drivers import views
+from rest_framework import routers
+from .views import DriverViewSet
+
 
 app_name = 'drivers'
 
-urlpatterns = [
-    path(r'drivers', views.driverApi),
-    path(r'drivers/<int:id>', views.driverApi),
-]
+router = routers.SimpleRouter()
+router.register('drivers', DriverViewSet)
+
+urlpatterns = router.urls

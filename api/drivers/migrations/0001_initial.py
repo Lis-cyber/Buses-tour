@@ -14,9 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Driver',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=True)),
                 ('name', models.CharField(max_length=20)),
                 ('last_name', models.CharField(max_length=20)),
+                ('full_name', models.CharField(max_length=50)),
             ],
         ),
     ]

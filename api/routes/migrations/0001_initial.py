@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('buses', '0002_alter_bus_driver'),
+        # ('buses', '0002_alter_bus_driver'),
     ]
 
     operations = [
@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             name='Route',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=20)),
                 ('start_date', models.DateTimeField(blank=True, null=True, unique=True)),
                 ('end_date', models.DateTimeField(blank=True, null=True, unique=True)),
                 ('assigned_bus', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='buses.bus')),

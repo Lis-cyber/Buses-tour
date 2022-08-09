@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('buses', '0002_alter_bus_driver'),
+        # ('buses', '0002_alter_bus_driver'),
     ]
 
     operations = [

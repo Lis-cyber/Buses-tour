@@ -1,9 +1,10 @@
-from django.urls import path
-from routes import views
+from rest_framework import routers
+from .views import RouteViewSet
+
 
 app_name = 'routes'
 
-urlpatterns = [
-    path(r'routes', views.routeApi),
-    path(r'routes/<int:id>', views.routeApi),
-]
+router = routers.SimpleRouter()
+router.register('routes', RouteViewSet)
+
+urlpatterns = router.urls
