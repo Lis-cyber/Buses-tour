@@ -11,7 +11,7 @@
         @click.stop="miniVariant = !miniVariant"
         color="primary"
         elevation="2"
-        :to="{ name: 'Buses' }"
+        :to="{ name: 'Drivers' }"
       >
         Ingresar
       </v-btn>

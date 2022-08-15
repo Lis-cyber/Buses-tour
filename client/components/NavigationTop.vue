@@ -12,9 +12,9 @@
       >
         <template>
           <v-tabs style="margin-left: 0.1rem">
-            <v-tab to="/Routes">Trayectos</v-tab>
-            <v-tab to="/Buses">Buses</v-tab>
             <v-tab to="/Drivers">Conductores</v-tab>
+            <v-tab to="/Buses">Buses</v-tab>
+            <v-tab to="/Routes">Trayectos</v-tab>
             <v-tab to="/Passengers">Pasajeros</v-tab>
           </v-tabs>
         </template>

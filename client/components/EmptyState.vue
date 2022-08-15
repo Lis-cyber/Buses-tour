@@ -55,7 +55,7 @@ export default {
   text-align: -webkit-center;
 }
 .empty-img {
-  /* background-image: url("../static/pax.jpg"); */
+  background-image: url("../static/pax.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
