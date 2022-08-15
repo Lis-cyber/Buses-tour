@@ -1,5 +1,5 @@
 from django.db import models
-from buses.models import Bus
+from routes.models import Route
 # Create your models here.
 
 
@@ -8,8 +8,10 @@ class Passenger(models.Model):
     name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     full_name = models.CharField(max_length=50)
-    assigned_seat = models.IntegerField(null=True)
-    assigned_bus = models.ForeignKey(Bus, on_delete=models.CASCADE, null=True)
-
+    date = models.CharField(max_length=20)
+    email = models.CharField(max_length=30)
+    seat = models.IntegerField(null=True)
+    route = models.JSONField()
+    
     def __str__(self):
-        return f'{self.full_name} {self.assigned_seat} {self.assigned_bus}'
+        return f'{self.full_name} {self.seat}'

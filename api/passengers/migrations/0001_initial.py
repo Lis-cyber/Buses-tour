@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=20)),
                 ('last_name', models.CharField(max_length=20)),
-                ('assigned_seat', models.IntegerField(null=True)),
+                ('seat', models.IntegerField(null=True)),
                 ('assigned_bus', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='buses.bus')),
             ],
         ),

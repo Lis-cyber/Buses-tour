@@ -1,6 +1,28 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import moment from "moment";
+
+export const getTimes = () => {
+  const hours = Array.from({ length: 24 }, (_, hour) =>
+    moment({
+      hour: Math.floor(hour),
+      minutes: 0,
+    }).format("hh:mm a")
+  );
+
+  let schedules = []
+  function pairwise(arr, func) {
+    for (var i = 0; i < arr.length - 1; i++) {
+      func(arr[i], arr[i + 1]);
+    }
+  }
+  pairwise(hours, function (current, next) {
+    schedules.push(current+" a "+next)
+  });
+
+  return schedules;
+};
 
 export const service = {
   init() {
@@ -42,8 +64,7 @@ export const getItem = async (path, id = null) => {
 };
 
 export const postItem = async (path, data) => {
-  try {
-    console.log("La data: ", data);
+  try { 
     const res = await Vue.axios.post(`${path}/`, data);
     response.data = res.data;
     response.error = null;

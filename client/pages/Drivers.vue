@@ -8,6 +8,9 @@
         :customHeaders="this.customHeaders"
         :deleteById="this.deleteById"
         :createEdit="this.createEdit"
+        :error="this.error"
+        @onError="cleanError()"
+        :loading="this.loading"
       />
     </div>
   </v-app>
@@ -20,7 +23,6 @@ export default {
   name: "Drivers",
   layout: "main",
   scrollToTop: true,
-  error: "",
   test: {},
   head() {
     return {
@@ -34,18 +36,25 @@ export default {
       title: "Conductores",
       subTitle: "Conductor",
       path: "drivers",
+      tips: ["Recuerda tener a mano los datos del conductor para completar el registro"],
+      prev_step: "Inicio",
+      step_path: "/",
+      image: "driver-form.jpg"
     },
     customHeaders: [
-      { text: "ID", value: "id", align: "start", sortable: true, edit: false, show: false },
+      { text: "ID", value: "id", align: "start", sortable: true, edit: false, show: true },
       { text: "Nombre", value: "name", edit: true, show: true },
       { text: "Apellido", value: "last_name", edit: true, show: true },
       { text: "Bus Asignado", value: "assigned_bus", edit: false, show: true },
-      { text: "Acciones", value: "actions", width: "13%", edit: false, show: false },
+      { text: "Acciones", value: "actions", width: "13%", edit: false, show: true },
     ],
     drivers: [],
     buses: [],
+    loading: false,
+    error: "",
   }),
   mounted() {
+    this.loading = true
     API.service.init();
     this.getBuses(); 
   },
@@ -53,6 +62,7 @@ export default {
     async getBuses() {
       const { data, error } = await API.getAllItems(`buses/`);
       if (error) {
+        this.loading = false
         this.error = error;
       } else {
         let driver = []
@@ -72,6 +82,7 @@ export default {
     async getDrivers() {
       const { data, error } = await API.getAllItems(`drivers/`);
       if (error) {
+        this.loading = false
         this.error = error;
       } else {
         const driversId = [...new Set(Object.values(this.buses)
@@ -88,20 +99,25 @@ export default {
           }
         })
         this.drivers = driverDat;
+        this.loading = false
       }
     },
     async deleteById(id) {
+      this.loading = true
       const { error } = await API.deleteItem(this.labels.path, id);
       if (error) {
+        this.loading = false
         this.error = error;
       } else {
         await this.getBuses();
       }
     },
     async createEdit(item, id = null) {
+      this.loading = true
       if (id) {
         const { error } = await API.putItem(this.labels.path, id, item);
         if (error) {
+          this.loading = false
           this.error = error;
         } else {
           await this.getBuses();
@@ -109,12 +125,16 @@ export default {
       } else {
         const { error } = await API.postItem(this.labels.path, item);
         if (error) {
+          this.loading = false
           this.error = error;
         } else {
           await this.getBuses();
         }
       }
     },
+    cleanError(){
+      this.error = ""
+    }
   },
 };
 </script>

@@ -1,15 +1,12 @@
 from django.db import models
-from buses.models import Bus
-# Create your models here.
-
+from django.contrib.postgres.fields import ArrayField
 
 class Route(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20)
-    assigned_bus = models.ForeignKey(Bus, on_delete=models.CASCADE, null=True)
-    start_date = models.DateTimeField(unique=True, null=True, blank=True)
-    end_date = models.DateTimeField(unique=True, null=True, blank=True)
-    # seat_number = models.IntegerField(null=True)
+    name = models.CharField(max_length=40)
+    pax_pct = models.IntegerField(blank=True, null=True)
+    pax_num = models.IntegerField(blank=True, null=True)
+    assigned_buses = ArrayField(models.JSONField())
 
     def __str__(self):
-        return f'{self.name} {self.assigned_bus}'
+        return f'{self.name}'

@@ -29,6 +29,31 @@
     </template>
   </v-app>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      windowWidth: 0,
+      windowHeight: 0,
+    };
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+      this.windowHeight = window.innerHeight;
+    },
+  },
+};
+</script>
+
 <style scoped>
 .main {
   display: block;
@@ -39,14 +64,9 @@
   margin: 0;
   padding: 0;
 }
-
 .main-control {
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.2)
-    ),
-    url("../static/left.jpg");
+  background-image: url("../static/start.jpg");
+  background-image: url("../static/sidebar.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -59,7 +79,6 @@
   grid-template-rows: 70px auto 70px;
   padding-top: 2%;
 }
-
 .main-body {
   background-color: #fff;
   position: absolute;
@@ -70,7 +89,6 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 .main-body-mobile {
   background-color: #fff;
   position: fixed;
@@ -79,7 +97,6 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 .main-control-logo {
   background-image: url("../static/bus.png");
   background-repeat: no-repeat;
@@ -89,13 +106,13 @@
 .main-control-logoText {
   font-size: xxx-large;
   text-align: center;
-  color: white;
+  color: orange;
   font-weight: bolder;
   font-variant: small-caps;
   font-family: "Muli", sans-serif !important;
   text-decoration: none;
+  text-shadow: rgb(255, 255, 255) 1px 2px 10px;
 }
-
 .main-control-powered {
   text-align: center;
   align-self: end;
@@ -118,25 +135,3 @@
   font-variant: normal;
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      windowWidth: window?.innerWidth,
-      windowHeight: window?.innerHeight,
-    };
-  },
-  async mounted() {
-    this.$nextTick(() => {
-      window?.addEventListener("resize", this.onResize);
-    });
-  },
-  methods: {
-    onResize() {
-      this.windowWidth = window?.innerWidth;
-      this.windowHeight = window?.innerHeight;
-    },
-  },
-};
-</script>

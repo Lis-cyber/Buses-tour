@@ -7,6 +7,7 @@ import json
 
 class BusSerializer(serializers.ModelSerializer):
     driver = DriverSerializer(required=False)
+    onRoute = serializers.ReadOnlyField()
 
     class Meta:
         model = Bus

@@ -1,12 +1,22 @@
 <template>
   <div class="row">
     <template v-if="windowWidth > 1000 && windowHeight > 300">
-      <v-app-bar outlined elevation="6" light>
+      <v-app-bar
+        color="white"
+        dark
+        prominent
+        shrink-on-scroll
+        fade-img-on-scroll
+        outlined
+        elevation="8"
+      >
         <template>
-          <v-tab><NuxtLink to="/Routes">Trayectos</NuxtLink></v-tab>
-          <v-tab><NuxtLink to="/Buses">Buses</NuxtLink></v-tab>
-          <v-tab><NuxtLink to="/Drivers">Conductores</NuxtLink></v-tab>
-          <v-tab><NuxtLink to="/Passengers">Pasajeros</NuxtLink></v-tab>
+          <v-tabs style="margin-left: 0.1rem">
+            <v-tab to="/Routes">Trayectos</v-tab>
+            <v-tab to="/Buses">Buses</v-tab>
+            <v-tab to="/Drivers">Conductores</v-tab>
+            <v-tab to="/Passengers">Pasajeros</v-tab>
+          </v-tabs>
         </template>
       </v-app-bar>
     </template>
@@ -44,8 +54,10 @@ export default {
 };
 </script>
 <style>
+.row {
+  margin: 0px;
+}
 .v-application a {
-  color: black;
   font-size: 1.2rem;
   font-family: "Muli", sans-serif !important;
   font-feature-settings: "smcp";
@@ -54,17 +66,20 @@ export default {
   text-decoration: none;
   text-transform: none;
 }
-.row {
-  margin: 0px;
-}
-.v-toolbar__content,
-.v-toolbar__extension {
-  background-color: #37878662;
-}
-a.nuxt-link-active {
+.v-tab--active {
   font-weight: bold;
 }
-a.nuxt-link-exact-active {
-  color: #c5b800;
+.v-tab.v-tab {
+  color: #fb8c00;
+}
+.theme--dark.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
+  color: #383e56;
+}
+.theme--dark.v-app-bar.v-toolbar.v-sheet {
+  background-image: url("../static/dots2.jpg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+  width: 100%;
 }
 </style>

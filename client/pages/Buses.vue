@@ -9,20 +9,23 @@
         :deleteById="this.deleteById"
         :createEdit="this.createEdit"
         :drivers="this.drivers"
+        :error="this.error"
+        @onError="cleanError()"
+        @displayError="displayError()"
+        :loading="this.loading"
       />
     </div>
   </v-app>
 </template>
 
 <script>
-import * as API from "@/http/api";
 
+import * as API from "@/http/api";
 
 export default {
   name: "Buses",
   layout: "main",
   scrollToTop: true,
-  error: "",
   head() {
     return {
       title: "Buses",
@@ -35,18 +38,25 @@ export default {
       title: "Buses",
       subTitle: "Bus",
       path: "buses",
+      tips: ["Recuerda que para registrar un Bus debes completar previamente el formulario de conductor"],
+      prev_step: "Conductores",
+      step_path: "/Drivers",
+      image: "bus-asign.jpg"
     },
     customHeaders: [
-      { text: "ID", value: "id", align: "start", sortable: true, edit: false, show: false},
+      { text: "ID", value: "id", align: "start", sortable: true, edit: false, show: true},
       { text: "Nombre", value: "name", edit: true, show: true },
       { text: "Conductor", value: "driver.full_name" , edit: true, show: true },
-      { text: "Capacidad", value: "capacity", edit: true, show: true },
-      { text: "Acciones", value: "actions", width: "13%", edit: false, show: false},
+      { text: "Cant. Asientos", value: "capacity", edit: false, show: true },
+      { text: "Acciones", value: "actions", width: "13%", edit: false, show: true},
     ],
     buses: [],
     drivers: [],
+    loading: false,
+    error: "",
   }),
   mounted() {
+    this.loading = true
     API.service.init();
     this.getBuses();
   },
@@ -54,10 +64,9 @@ export default {
     async getBuses() {
       const { data, error } = await API.getAllItems(`buses/`);
       if (error) {
-        this.error = error;
+        this.loading = false
+        this.error = error;        
       } else {
-        const arr = Array(24 * 4).fill(0).map((_, i) => { return ('0' + ~~(i / 4) + ': 0' + 60  * (i / 4 % 1)).replace(/\d(\d\d)/g, '$1') });
-        // console.log("Arr: ", arr)
         this.buses = data;
         this.getDrivers();
       }
@@ -65,7 +74,8 @@ export default {
     async getDrivers() {
       const { data, error } = await API.getAllItems(`drivers/`);
       if (error) {
-        this.error = error;
+        this.loading = false
+        this.error = error;        
       } else {
         const driversId = [...new Set(Object.values(this.buses)
           .map(function(val) {
@@ -78,33 +88,45 @@ export default {
           }
         })
         this.drivers = useDrivers;
+        this.loading = false
       }
     },
     async deleteById(id) {
+      this.loading = true
       const { error } = await API.deleteItem(this.labels.path, id);
       if (error) {
-        this.error = error;
+        this.loading = false
+        this.error = error;        
       } else {
         await this.getBuses();
       }
     },
     async createEdit(item, id = null) {
+      this.loading = true
       if (id) {
         const { error } = await API.putItem(this.labels.path, id, item);
         if (error) {
-          this.error = error;
+          this.loading = false
+          this.error = error;          
         } else {
           await this.getBuses();
         }
       } else {
         const { error } = await API.postItem(this.labels.path, item);
         if (error) {
-          this.error = error;
+          this.loading = false
+          this.error = error;          
         } else {
           await this.getBuses();
         }
       }
     },
+    cleanError(){
+      this.error = ""
+    },
+    displayError(){
+      this.error = "No puedes eliminar un Bus asignado a un Trayecto"
+    }
   },
 };
 </script>
