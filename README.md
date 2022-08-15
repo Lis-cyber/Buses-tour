@@ -2,7 +2,11 @@
 
 Administrador de Agencia de Buses, que permite crear y editar buses, trayectos, conductores y pasajeros.
 
-Para instalar y levantar el proyecto, se presenta la siguiente guía, tanto para el Back como para el front.
+Para instalar y levantar el proyecto, se presenta la siguiente guía, tanto para el Back como para el front. Debes tener previamente instaladas las siguientes tecnologías:
+```bash
+Back: Python 3.10.1
+Front: Vue.js 2.9.6
+```
 
 El primer paso es clonar el Repositorio (Allí estan ambas carpetas)
 ```bash
@@ -62,19 +66,18 @@ cd Buses-tour/client
 ```
 
 - Procede a instalar las dependencias.
-
 ```bash
 npm install
 ```
+
 - En la raiz de la carpeta client, genera un archivo .env con la sigiente información.
 ```bash
 BASE_URL=http://127.0.0.1:8000/api/v1.0/
 ```
 
 - Finalmente ejecuta el siguiente comando para levantar el servidor.
-
 ```bash
-npm run serve
+npm run dev
 ```
 
 <br>
