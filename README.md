@@ -24,10 +24,10 @@ cd Buses-tour/api
 ```bash
 pip install -r requirements.txt
 ```
-- Genera una Base de Datos en PostgreSQL (Debes tenerlo previamente instalado).
+- Genera una Base de Datos en PostgreSQL (Debes tenerlo previamente instalado). Puedes hacerlo desde la terminal de SQL Shell con el siguiente comando, o ingresando al PGAdmin
 
 ```bash
-CREATE DATABASE buses
+CREATE DATABASE busses
 ```
 - Ingresa a la carpeta config en el archivo settings.py, ubica la DATABASE y configura las credenciales con las de tu PostgreSQL.
 
@@ -46,6 +46,10 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+- Para acceder a la interfaz de Django REST framework, ingresa al siguiente path: 
+```bash
+http://127.0.0.1:8000/api/v1.0/
+```
 
 <br>
 <br>
@@ -61,6 +65,10 @@ cd Buses-tour/client
 
 ```bash
 npm install
+```
+- En la raiz de la carpeta client, genera un archivo .env con la sigiente información.
+```bash
+BASE_URL=http://127.0.0.1:8000/api/v1.0/
 ```
 
 - Finalmente ejecuta el siguiente comando para levantar el servidor.
